@@ -84,8 +84,10 @@ export class ObsRunComponent implements OnDestroy {
         if (!lobby) return;
 
         lobby = Object.assign(new Lobby(lobby.runData, lobby.creatorId, lobby.password, lobby.id), lobby);
-        lobby.removeUser(this.localPlayer.user.id);
-        this.firestoreService.updateLobby(lobby);
+        if (lobby.hasUser(this.localPlayer.user.id)) {
+          lobby.removeUser(this.localPlayer.user.id);
+          this.firestoreService.updateLobby(lobby);
+        }
         this.currentLobbyId = null;
       });
       this.currentLobbyId = null;
