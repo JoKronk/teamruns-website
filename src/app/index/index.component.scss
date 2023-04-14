@@ -50,12 +50,42 @@
         margin: auto;
         padding: 0 40px 60px;
     }
+    &-download {
+        flex: 1;
+        min-width: 0;
+        max-width: 190px !important;
+        display: flex;
+        transition: 0.2s;
+        &:hover {
+            cursor: pointer;
+            background-color: #181818;
+        }
+        &-container {
+            display: flex;
+            max-width: 600px !important;
+            margin: auto;
+            margin-bottom: 40px;
+        }
+        & p {
+            flex-grow: 1;
+        }
+        & mat-icon {
+            flex-shrink: 1;
+            margin: auto;
+            margin-right: 18px;
+            width: 78px;
+            height: 42px;
+            font-size: 42px;
+        }
+    }
+    &-full {
+        min-width: 400px;
+    }
     &-box {
         margin: auto;
         padding: 1px 10px;
         background: rgba(0, 0, 0, 0.5);
         border: 2px solid #a56d06;
-        min-width: 400px;
         max-width: 800px;
         border-radius: 10px;
         font-family: 'jak';
