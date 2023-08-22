@@ -9,5 +9,6 @@ import { Team } from '../common/run/team';
 export class RunSplitsComponent {
   
   @Input() team: Team;
+  @Input() seperator: boolean = false;
   
 }

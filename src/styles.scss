@@ -38,6 +38,23 @@ $teamrun-website-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #494949; 
+  border-radius: 3px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #dddddd; 
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cecece; 
+}
 
 @font-face {
   font-family: jak;

@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +22,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './header/header.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { HeaderComponent } from './header/header.component';
     RunTimerComponent,
     SnackbarComponent,
     HeaderComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +42,11 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatSnackBarModule,
     MatIconModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    NgChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

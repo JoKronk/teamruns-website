@@ -3,10 +3,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { CollectionName } from '../common/firestore/collection-name';
+import { DbLeaderboard } from '../common/firestore/db-leaderboard';
+import { DbPb } from '../common/firestore/db-pb';
+import { DbUsersCollection } from '../common/firestore/db-users-collection';
 import { Lobby } from '../common/firestore/lobby';
 import { Preset } from '../common/firestore/preset';
 import { DataChannelEvent } from '../common/peer/data-channel-event';
 import { RTCPeer } from '../common/peer/rtc-peer';
+import { CategoryOption } from '../common/run/category';
 import { Run } from '../common/run/run';
 
 @Injectable({
@@ -14,12 +18,12 @@ import { Run } from '../common/run/run';
 })
 export class FireStoreService {
 
-  private runs: AngularFirestoreCollection<Run>;
+  private globalData: AngularFirestoreCollection<DbUsersCollection>;
   private lobbies: AngularFirestoreCollection<Lobby>;
   private isAuthenticated: boolean = false;
 
   constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) {
-    this.runs = firestore.collection<Run>(CollectionName.runs);
+    this.globalData = firestore.collection<DbUsersCollection>(CollectionName.globalData);
     this.lobbies = firestore.collection<Lobby>(CollectionName.lobbies);
   }
 
@@ -35,9 +39,24 @@ export class FireStoreService {
     return this.firestore.collection<Lobby>(CollectionName.lobbies, ref => ref.where('runnerIds', 'array-contains', userId)).valueChanges();
   }
 
+  async getUsers() {
+    this.checkAuthenticated();
+    return (await this.globalData.doc("users").ref.get()).data();
+  }
+
   async getLobbyDoc(id: string) {
     await this.checkAuthenticated();
     return this.firestore.collection<Lobby>(CollectionName.lobbies).doc(id);
+  }
+
+  getLeaderboard(category: CategoryOption, sameLevel: boolean, players: number) {
+    this.checkAuthenticated();
+    return this.firestore.collection<DbLeaderboard>(CollectionName.leaderboards, ref => ref.where('category', '==', category).where('sameLevel', '==', sameLevel).where('players', '==', players)).valueChanges({idField: 'id'});
+  }
+
+  getWrs(category: CategoryOption, sameLevel: boolean, playerCount: number) {
+    this.checkAuthenticated();
+    return this.firestore.collection<DbPb>(CollectionName.personalBests, ref => ref.where('category', '==', category).where('sameLevel', '==', sameLevel).where('playerCount', '==', playerCount).where('wasWr', '==', true)).valueChanges({idField: 'id'});
   }
 
   async addLobby(lobby: Lobby) {

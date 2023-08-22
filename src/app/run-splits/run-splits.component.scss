@@ -50,6 +50,9 @@
         &::-webkit-scrollbar {
             display: none;
         }
+        &-seperator {
+            border-top: 1px solid rgb(212, 144, 18, 0.7) !important;
+        }
     }
     & img {
         height: 40px;

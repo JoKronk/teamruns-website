@@ -102,7 +102,7 @@ export class RTCPeerDataConnection {
                 if (this.isMaster)
                     this.setupServerCommunicationEventSubscription(peer, eventChannel);
                 else
-                    this.setupServerCommunicationEventSubscription(new UserBase("host", peer.name, peer.twitchName), eventChannel);
+                    this.setupServerCommunicationEventSubscription(new UserBase("host", peer.name), eventChannel);
                 if (connectionLog)
                     connectionLog.push("Waiting for response from host...");
             }

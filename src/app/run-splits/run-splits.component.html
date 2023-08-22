@@ -6,7 +6,7 @@
       <span>{{ team.cellCount }}</span>
     </div>
   </div>
-  <div class="tasks-container">
+  <div class="tasks-container" [class.tasks-container-seperator]="seperator">
     <div *ngFor="let task of team.tasks" class="tasks">
       <img [src]="'./assets/icons/' + task.gameTask + '.png'">
       <span class="tasks-player"> {{ task.obtainedByName }}</span>

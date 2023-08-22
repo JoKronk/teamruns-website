@@ -1,26 +1,27 @@
+import { DbUser } from "../firestore/db-user";
+
 export class UserBase {
     id: string;
     name: string;
-    twitchName: string;
 
-    constructor(id: string, name: string, twitch: string) {
+    constructor(id: string, name: string) {
         this.id =  id;
         this.name = name;
-        this.twitchName = twitch;
     }
 
     getUserBase(): UserBase {
-        return new UserBase(this.id, this.name, this.twitchName);
+        return new UserBase(this.id, this.name);
     }
 }
 
 
 export class User extends UserBase {
-    ogFolderpath: string;
-    darkMode: boolean;
+    ogFolderpath: string = "";
+    darkMode: boolean = true;
+    displayName: string;
 
     constructor() {
-        super(crypto.randomUUID(), "", "");
+        super(crypto.randomUUID(), "");
         this.ogFolderpath = "";
         this.darkMode = true;
     }
@@ -31,7 +32,7 @@ export class User extends UserBase {
 
     isEqualToDataCopy(copy: User) : boolean {
         return this.name === copy.name &&
-            this.twitchName === copy.twitchName &&
+            this.displayName === copy.displayName &&
             this.ogFolderpath === copy.ogFolderpath &&
             this.darkMode === copy.darkMode;
     }
