@@ -25,6 +25,7 @@ export class FireStoreService {
   constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) {
     this.globalData = firestore.collection<DbUsersCollection>(CollectionName.globalData);
     this.lobbies = firestore.collection<Lobby>(CollectionName.lobbies);
+    this.checkAuthenticated();
   }
 
   private async checkAuthenticated() {
@@ -40,7 +41,7 @@ export class FireStoreService {
   }
 
   async getUsers() {
-    this.checkAuthenticated();
+    await this.checkAuthenticated();
     return (await this.globalData.doc("users").ref.get()).data();
   }
 
