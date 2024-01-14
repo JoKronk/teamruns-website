@@ -213,6 +213,13 @@ export class LeaderboardComponent {
     }
   }
 
+  deselectRun() {
+    if (this.selectedRun) {
+      this.selectedRun = null;
+      this.selectedTeam = null;
+    }
+  }
+
 }
 
 
