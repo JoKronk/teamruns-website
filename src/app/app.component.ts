@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'TeamRun';
 
-  constructor(public _user: UserService) {
-
+  constructor(public _user: UserService, public router: Router) {
+    
   }
 }
