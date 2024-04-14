@@ -13,6 +13,7 @@ import { Timer } from '../common/run/timer';
 import { Team } from '../common/run/team';
 import { Task } from '../common/opengoal/task';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-leaderboard',
@@ -35,6 +36,7 @@ export class LeaderboardComponent {
   toggleSaved: boolean = false;
   wrHistoryLoaded: boolean = false;
   boardHasLoaded: boolean = false;
+  usersLoaded: boolean = false;
   showWrHistory: boolean = false;
 
   selectedCategory: CategoryOption = CategoryOption.NoLts;
@@ -50,22 +52,73 @@ export class LeaderboardComponent {
   selectedRun: DbLeaderboardPb | null = null;
   selectedTeam: Team | null = null;
 
-  constructor(private firestoreService: FireStoreService) {
+  constructor(private firestoreService: FireStoreService, private router: Router, private route: ActivatedRoute) {
 
-    this.firestoreService.getUsers().then(collection => {
-      this.usersCollection = collection;
-      this.updateContent();
+    this.route.queryParamMap.subscribe((params) => {
+      let skipUpdate: boolean = this.boardHasLoaded || this.wrHistoryLoaded;
+
+      let sameLevel = params.get('sl');
+      if (sameLevel && sameLevel !== this.sameLevel) {
+        skipUpdate = false;
+        this.sameLevel = sameLevel;
+      }
+
+      let players = params.get('p');
+      if (players && !isNaN(+players) && +players !== this.players) {
+        skipUpdate = false;
+        this.players = Number(players);
+      }
+      
+      let cat = params.get('cat');
+      if (cat && !isNaN(+cat) && +cat !== this.selectedCategory) {
+        skipUpdate = false;
+        this.selectedCategory = Number(cat);
+      }
+      
+      let wr = params.get('wr');
+      if (wr && wr !== this.showWrHistory.toString()) {
+        skipUpdate = false;
+        this.showWrHistory = (wr === "true");
+      }
+
+      if (!skipUpdate)
+        this.onQueryParamUpdate();
     });
   }
 
+
+  onQueryParamUpdate() {
+    if (!this.usersLoaded) {
+      this.firestoreService.getUsers().then(collection => {
+        this.usersCollection = collection;
+        this.usersLoaded = true;
+        this.updateContent();
+      });
+    }
+    else
+      this.updateContent();
+  }
+
+
   changeCategory(category: number) {
     this.selectedCategory = category;
+    this.router.navigate([], { relativeTo: this.route, queryParams: { cat: this.selectedCategory }, queryParamsHandling: 'merge'} );
     this.updateContent();
   }
 
   changePlayerCount() {
-    if (this.players === 1)
+    if (this.players === 1) {
       this.sameLevel = "false";
+      this.router.navigate([], { relativeTo: this.route, queryParams: { sl: this.sameLevel, players: this.players }, queryParamsHandling: 'merge'} );
+    }
+    else
+      this.router.navigate([], { relativeTo: this.route, queryParams: { p: this.players }, queryParamsHandling: 'merge'} );
+
+    this.updateContent();
+  }
+
+  onSameLevelChange() {
+    this.router.navigate([], { relativeTo: this.route, queryParams: { sl: this.sameLevel }, queryParamsHandling: 'merge'} );
     this.updateContent();
   }
 
@@ -84,6 +137,7 @@ export class LeaderboardComponent {
     if (iscontentToggle) {
       this.toggleSaved = true;
       this.showWrHistory = !this.showWrHistory;
+      this.router.navigate([], { relativeTo: this.route, queryParams: { wr: this.showWrHistory }, queryParamsHandling: 'merge'} );
     }
 
     this.selectedRun = null;

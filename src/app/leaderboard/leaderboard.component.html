@@ -10,7 +10,7 @@
       <hr />
       <div>
         <div class="subcategory" [class.soft-hide]="players === 1">
-          <mat-button-toggle-group [(ngModel)]="sameLevel" appearance="legacy" (change)="updateContent()">
+          <mat-button-toggle-group [(ngModel)]="sameLevel" appearance="legacy" (change)="onSameLevelChange()">
             <mat-button-toggle value="false">Individual</mat-button-toggle>
             <mat-button-toggle value="true">Same Level</mat-button-toggle>
           </mat-button-toggle-group>
