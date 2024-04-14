@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "teamrun-website",
-    "public": "dist/teamrun-website",
+    "target": "teamruns-website",
+    "public": "dist/teamruns-website",
     "ignore": [
       "**/.*"
     ],

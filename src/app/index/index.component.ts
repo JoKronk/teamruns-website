@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 })
 export class IndexComponent {
 
-  tag: string = "";
+  release: string = "";
 
   constructor(private httpClient: HttpClient) {
-    this.httpClient.get('https://api.github.com/repos/JoKronk/TeamRun-Client/tags').subscribe(tags => {
-      this.tag = (tags as Tag[]).sort(function (a, b) {
+    this.httpClient.get('https://api.github.com/repos/JoKronk/teamruns-client/releases').subscribe(releases => {
+      this.release = (releases as Release[]).sort(function (a, b) {
         return ('' + b.name).localeCompare(a.name);
       })[0].name.substring(1);
     });
@@ -21,6 +21,6 @@ export class IndexComponent {
 
 }
 
-class Tag {
+class Release {
   name: string
 }

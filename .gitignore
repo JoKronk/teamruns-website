@@ -41,7 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-#TeamRun Client
+#Teamruns Client
 /src/environments/environment.ts
 
 # Firebase

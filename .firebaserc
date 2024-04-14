@@ -2,7 +2,7 @@
   "targets": {
     "teamrun-server": {
       "hosting": {
-        "teamrun-website": [
+        "teamruns-website": [
           "" //add firebase webapp name and remove comment
         ]
       }
