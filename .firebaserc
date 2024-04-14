@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "teamrun-server": {
-      "hosting": {
-        "teamruns-website": [
-          "" //add firebase webapp name and remove comment
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "" //add firebase website server name and remove comment
+    "default": "teamrun-server"
   }
 }
