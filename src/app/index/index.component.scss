@@ -53,7 +53,7 @@
 }
 
 .info-text {
-    margin: 26px 0 30px;
+    margin: 26px 0 6px;
     font-family: 'precursor';
     font-size: 52px;
     color: #6c4700;
@@ -66,6 +66,20 @@
         margin: auto;
         padding: 0 40px 60px;
     }
+    &-version {
+        font-family: 'jak';
+        text-align: center;
+        color: #b4b4b4;
+        font-size: 32px;
+        line-height: 0;
+        text-decoration: underline;
+
+        &-container {
+            display: flex;
+            max-width: 600px !important;
+            margin: auto;
+        }
+    }
     &-download {
         flex: 1;
         min-width: 0;
@@ -77,10 +91,10 @@
             background-color: #181818;
         }
         &-container {
+            flex: 1;
             display: flex;
-            max-width: 600px !important;
-            margin: auto;
-            margin-bottom: 40px;
+            flex-direction: column;
+            margin-bottom: 25px;
         }
         & p {
             flex-grow: 1;
@@ -100,6 +114,7 @@
     &-box {
         margin: auto;
         padding: 1px 10px;
+        margin-bottom: 25px;
         background: rgba(0, 0, 0, 0.5);
         border: 2px solid #a56d06;
         max-width: 800px;
@@ -124,6 +139,10 @@
                 color: #a56d06;
             }
         }
+        &-linux {
+            border: 2px solid #4892a3;
+            color: #4892a3;
+        }
     }
 }
 
@@ -135,4 +154,13 @@
     font-size: 24px;
     color: #6c4700;
     -webkit-user-select: none;
+}
+
+@media all and (max-width: 601px) {
+    .info-version-container {
+        flex-direction: column;
+    }
+    .info-container {
+        padding: 0;
+    }
 }
