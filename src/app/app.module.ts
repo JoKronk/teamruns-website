@@ -23,9 +23,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
-import { ObsRunComponent } from './obs-run/obs-run.component';
 import { RunSplitsComponent } from './run-splits/run-splits.component';
-import { RunTimerComponent } from './run-timer/run-timer.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -38,9 +36,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
   declarations: [
     AppComponent,
     IndexComponent,
-    ObsRunComponent,
     RunSplitsComponent,
-    RunTimerComponent,
     RandomCellComponent,
     SnackbarComponent,
     HeaderComponent,

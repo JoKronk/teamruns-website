@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
 import { FireStoreService } from '../services/fire-store.service';
-import { Subscription } from 'rxjs';
 import { DbUsersCollection } from '../common/firestore/db-users-collection';
 import { Category, CategoryOption } from '../common/run/category';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,11 +11,20 @@ Chart.register(zoomPlugin);
 import 'chartjs-adapter-date-fns';
 import { Timer } from '../common/run/timer';
 import { Team } from '../common/run/team';
+import { Task } from '../common/opengoal/task';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
-  styleUrls: ['./leaderboard.component.scss']
+  styleUrls: ['./leaderboard.component.scss'],
+  animations: [
+    trigger('runExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])
+  ]
 })
 export class LeaderboardComponent {
 
@@ -43,7 +50,7 @@ export class LeaderboardComponent {
   selectedRun: DbLeaderboardPb | null = null;
   selectedTeam: Team | null = null;
 
-  constructor(public _user: UserService, private firestoreService: FireStoreService) {
+  constructor(private firestoreService: FireStoreService) {
 
     this.firestoreService.getUsers().then(collection => {
       this.usersCollection = collection;
@@ -96,7 +103,7 @@ export class LeaderboardComponent {
 
       this.leaderboard.pbs.forEach((pb, index) => {
         this.leaderboard.pbs[index] = Object.assign(new DbLeaderboardPb(), pb);
-        this.leaderboard.pbs[index].fillFrontendValues(this.usersCollection!);
+        this.leaderboard.pbs[index].fillFrontendValues(this.usersCollection!, "", (index + 1));
       });
       this.leaderboard.pbs = this.leaderboard.pbs.sort((a, b) => a.endTimeMs - b.endTimeMs);
 
@@ -204,11 +211,13 @@ export class LeaderboardComponent {
     else {
       this.selectedRun = run;
       let team = new Team(0, "");
-      team.tasks = this.selectedRun.tasks;
-      team.tasks.forEach((task, index) => {
-        team.tasks[index].obtainedByName = this.usersCollection?.users.find(x => x.id === task.obtainedById)?.name ?? "Unknown";
+      
+      this.selectedRun.tasks.forEach(dbTask => {
+        let task = Task.fromDbTask(dbTask);
+        task.obtainedByName = this.usersCollection?.users.find(x => x.id === task.obtainedById)?.name ?? "Unknown";
+        team.splits.push(task);
       });
-      team.cellCount = this.selectedRun.tasks.filter(x => x.isCell).length;
+      team.runState.cellCount = this.selectedRun.tasks.filter(x => x.isCell).length;
       this.selectedTeam = team;
     }
   }

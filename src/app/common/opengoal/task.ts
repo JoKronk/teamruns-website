@@ -1,65 +1,29 @@
-import { UserBase } from "../user/user";
+import { DbTask } from "../firestore/db-task";
 
 export class Task {
     gameTask: string;
-    isCell: boolean;
+    isCollectedCell: boolean;
     obtainedByName: string;
     obtainedById: string;
     obtainedAt: string;
 
-    constructor(task: string, user: UserBase, timerTime: string) {
-        this.gameTask = task;
-        this.isCell = Task.isCell(task);
-        this.obtainedById = user.id;
-        this.obtainedByName = user.name;
-        this.obtainedAt = timerTime;
+    constructor() {
     }
 
-    public static getTaskStatusValues(): Map<string, number> {
-        return new Map([
-            ["invalid", 8], //is 0 in game but making it 8 here as it's set last
-            ["unknown", 1],
-            ["need-hint", 2],
-            ["need-introduction", 3],
-            ["need-reminder-a", 4],
-            ["need-reminder", 5],
-            ["need-reward-speech", 6],
-            ["need-resolution", 7]
-        ])
+    public static fromDbTask(task: DbTask): Task {
+        return {
+            gameTask: task.gameTask,
+            isCollectedCell: task.isCell,
+            obtainedByName: task.obtainedByName,
+            obtainedById: task.obtainedById,
+            obtainedAt: task.obtainedAt
+        };
     }
 
-    public static getCellEname(task: string): string | undefined {
-        return new Map([
-            ["training-gimmie", "fuel-cell-55"],
-            ["training-door", "fuel-cell-53"],
-            ["training-climb", "fuel-cell-54"],
-            ["beach-gimmie", "fuel-cell-40"],
-            ["beach-sentinel", "fuel-cell-42"],
-            ["jungle-canyon-end", "fuel-cell-46"],
-            ["jungle-temple-door", "fuel-cell-49"],
-            ["jungle-tower", "fuel-cell-1"],
-            ["misty-warehouse", "fuel-cell-11"],
-            ["misty-boat", "fuel-cell-12"],
-            ["misty-bike-jump", "fuel-cell-51"],
-            ["misty-eco-challenge", "fuel-cell-50"],
-            ["rolling-lake", "fuel-cell-45"],
-            ["sunken-platforms", "fuel-cell-24"],
-            ["sunken-sharks", "fuel-cell-26"],
-            ["sunken-top-of-helix", "fuel-cell-25"],
-            ["sunken-spinning-room", "fuel-cell-52"],
-            ["swamp-flutflut", "fuel-cell-15"],
-            ["ogre-secret", "fuel-cell-62"],
-            ["snow-fort", "fuel-cell-30"],
-            ["snow-bunnies", "fuel-cell-28"],
-            ["cave-platforms", "fuel-cell-60"],
-            ["cave-dark-climb", "fuel-cell-59"],
-            ["cave-spider-tunnel", "fuel-cell-58"],
-            ["cave-robot-climb", "fuel-cell-57"],
-            ["cave-swing-poles", "fuel-cell-56"],
-        ]).get(task);
-    }
+    public static lastboss = "finalboss-movies";
+    public static forfeit = "finalboss-forfeit";
 
-    public static isCell(gameTask: string) {
+    public static resultsInCell(gameTask: string) {
         return ([
             "jungle-eggtop",
             "jungle-lurkerm",
@@ -183,15 +147,6 @@ export class Task {
             "village3-miner-money4",
             "village3-oracle-money1",
             "village3-oracle-money2"
-        ]).includes(gameTask);
-    }
-
-
-    public static isWarpGate(gameTask: string) {
-        return ([
-            "village2-levitator",
-            "village3-button",
-            "village4-button"
         ]).includes(gameTask);
     }
 }

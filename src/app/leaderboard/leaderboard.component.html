@@ -43,8 +43,8 @@
                 <ng-container matColumnDef="players">
                     <th mat-header-cell *matHeaderCellDef> Players </th>
                     <td mat-cell class="no-wrap" *matCellDef="let run">
-                      <span *ngFor="let user of run.userIds; let end = last">
-                        {{user}}<span *ngIf="!end"> · </span> 
+                      <span *ngFor="let user of run.userDisplayContent; let end = last">
+                        {{user.name}}<span *ngIf="!end"> · </span>
                       </span>
                     </td>
                 </ng-container>
@@ -60,9 +60,33 @@
                     <th mat-header-cell *matHeaderCellDef> Version </th>
                     <td mat-cell *matCellDef="let run"> {{run.version}} </td>
                 </ng-container>
-      
+  
+                <ng-container matColumnDef="expandedRun">
+                    <td mat-cell *matCellDef="let run" [attr.colspan]="columns.length">
+                      <div [@runExpand]="run == selectedRun ? 'expanded' : 'collapsed'">
+                          <div class="content-cont">
+                            <div>
+                                <div *ngFor="let content of run.userDisplayContent">
+                                  <p *ngIf="content.comment"><b>{{ content.name }}:</b> {{ content.comment }}</p>
+                                </div>
+                                <div *ngFor="let content of run.userDisplayContent">
+                                  <p *ngIf="content.videoLink"><b>{{ content.name }}:</b> 
+                                    <iframe
+                                      src="https://player.twitch.tv/?video=v66818638&parent=localhost"
+                                      allowfullscreen>
+                                    </iframe>
+                                  </p>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                    </td>
+                </ng-container>
+  
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
-                <tr mat-row *matRowDef="let run; columns: columns;" class="run-row" [class.run-row-selected]="selectedRun?.id === run.id" (click)="selectRun(run)"></tr>
+                <tr mat-row *matRowDef="let run; columns: columns;" class="run-row"
+                  [class.run-expanded-row-open]="selectedRun?.id === run.id" (click)="selectRun(run)"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedRun']" class="run-expanded-row"></tr>
             </table>
             <div *ngIf="leaderboard.pbs.length === 0 && boardHasLoaded" class="page-table-none">
               <h4>No runs found</h4>
@@ -83,5 +107,4 @@
         <h1>LB</h1>
     </div>
   
-    <p id="name" class="text-in-background" [title]="_user.user.name">{{ _user.user.name }}</p>
   </div>

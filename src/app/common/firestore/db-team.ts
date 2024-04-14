@@ -1,6 +1,6 @@
-import { Task } from "../opengoal/task";
 import { Team } from "../run/team";
 import { DbPlayer } from "./db-player";
+import { DbTask } from "./db-task";
 
 
 export class DbTeam {
@@ -8,15 +8,19 @@ export class DbTeam {
     name: string;
     endTimeMs: number;
     players: DbPlayer[] = [];
-    tasks: Task[];
+    tasks: DbTask[] = [];
     cellCount: number;
+    runIsValid: boolean;
 
     constructor(team: Team) {
         this.id = team.id;
         this.name = team.name;
         this.endTimeMs = team.endTimeMs;
-        this.tasks = team.tasks;
-        this.cellCount = team.cellCount;
+        this.cellCount = team.runState.cellCount;
+        this.runIsValid = team.runIsValid;
+        team.splits.forEach(split => {
+            this.tasks.push(new DbTask(split));
+        });
         team.players.forEach(player => {
             this.players.push(new DbPlayer(player));
         });

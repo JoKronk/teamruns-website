@@ -1,18 +1,21 @@
-import { GameState } from "./game-state";
 import { PlayerState } from "./player-state";
 import { UserBase } from "../user/user";
+import { DbPlayer } from "../firestore/db-player";
 
 export class Player {
-    user: UserBase
-    cellsCollected: number;
-    gameState: GameState;
-    state: PlayerState;
+    user: UserBase;
+    cellsCollected: number = 0;
+    currentLevel: string = "";
+    state: PlayerState = PlayerState.Neutral;
 
     constructor(user: UserBase) {
         this.user = user;
-        this.cellsCollected = 0;
-        this.state = PlayerState.Neutral;
-        this.gameState = new GameState();
+    }
+
+    static fromDbPlayer(dbPlayer: DbPlayer): Player {
+        let player: Player = new Player(dbPlayer.user);
+        player.cellsCollected = dbPlayer.cellsCollected;
+        return player;
     }
 
 
