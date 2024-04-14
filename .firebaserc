@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "teamrun-server"
-  }
+  },
+  "targets": {
+    "teamrun-server": {
+      "hosting": {
+        "teamruns": [
+          "teamruns"
+        ],
+        "teamrun": [
+          "teamrun"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
