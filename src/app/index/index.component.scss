@@ -73,6 +73,7 @@
         font-size: 32px;
         line-height: 0;
         text-decoration: underline;
+        flex-shrink: 1;
 
         &-container {
             display: flex;
@@ -84,6 +85,7 @@
         flex: 1;
         min-width: 0;
         max-width: 190px !important;
+        max-height: 101px;
         display: flex;
         transition: 0.2s;
         &:hover {
@@ -114,6 +116,7 @@
     &-box {
         margin: auto;
         padding: 1px 10px;
+        margin-top: 0;
         margin-bottom: 25px;
         background: rgba(0, 0, 0, 0.5);
         border: 2px solid #a56d06;
