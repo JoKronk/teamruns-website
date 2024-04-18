@@ -86,6 +86,8 @@
         min-width: 0;
         max-width: 190px !important;
         max-height: 101px;
+        font-family: 'jak' !important;
+        font-size: 24px !important;
         display: flex;
         transition: 0.2s;
         &:hover {
@@ -122,16 +124,15 @@
         border: 2px solid #a56d06;
         max-width: 800px;
         border-radius: 10px;
-        font-family: 'jak';
         color: #a56d06;
-        font-size: 24px;
+        font-size: 22px;
         & p {
             display: flex;
         }
         & span {
             flex-shrink: 1;
             display: inline-block;
-            margin-bottom: 16px;
+            margin-bottom: 6px;
             margin-right: 10px;
         }
         & a {
@@ -139,12 +140,17 @@
             text-decoration: underline;
             transition: 0.15s;
             &:hover {
+                cursor: pointer;
                 color: #a56d06;
             }
         }
         &-linux {
             border: 2px solid #4892a3;
             color: #4892a3;
+        }
+        &-title {
+            font-family: 'jak';
+            font-size: 28px;
         }
     }
 }
