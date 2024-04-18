@@ -1,14 +1,24 @@
 <div class="header">
-    <div routerLink="/" class="option">
-        <span>Teamruns</span>
+    <div class="header-main">
+        <div routerLink="/" class="option">
+            <span>Teamruns</span>
+        </div>
+        <div routerLink="/leaderboards" class="option">
+            <span>Leaderboards</span>
+        </div>
+        <div routerLink="/faq" class="option">
+            <span>FAQ</span>
+        </div>
     </div>
-    <div routerLink="/leaderboards" class="option">
-        <span>Leaderboards</span>
-    </div>
-    <div routerLink="/faq" class="option">
-        <span>FAQ</span>
-    </div>
-    <div routerLink="/rco" class="option">
-        <span>RCO</span>
+    <div class="header-extra">
+        <div (click)="externalRedirect('/rco')" class="option">
+            <span>Random Cell Order</span>
+        </div>
+        <div (click)="externalRedirect('https://opengoal.dev/')" class="option">
+            <span>OpenGOAL</span>
+        </div>
+        <div (click)="externalRedirect('https://jakmods.dev/')" class="option">
+            <span>Jak Mods</span>
+        </div>
     </div>
 </div>

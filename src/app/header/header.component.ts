@@ -11,5 +11,9 @@ export class HeaderComponent {
   constructor(private router: Router) {
     
   }
+
+  externalRedirect(url: string) {
+    window.open(url, "_blank");
+  }
   
 }

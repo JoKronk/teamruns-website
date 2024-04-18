@@ -1,6 +1,7 @@
 
 .background-image {
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 1;
@@ -28,11 +29,8 @@
         color: #696969;
         margin-bottom: 6px;
     }
-    &-header {
-        flex-shrink: 1;
-        height: 60px;
-    }
     &-info {
+        margin-top: 20px;
         flex-shrink: 1;
         &-link {
             margin-left: 6px;

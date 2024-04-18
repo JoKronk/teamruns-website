@@ -1,35 +1,49 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100vw;
-    height: 30px;
+    height: 40px;
     padding-top: 8px;
-    padding-left: 25px;
     z-index: 3;
     display: flex;
     border-bottom: 2px solid #a56d06;
     background-color: rgba(24, 24, 24, 0.85);
+    position: relative;
+
+    &-main {
+        display: flex;
+        flex-grow: 1;
+        padding-left: 15px;
+    }
+
+    &-extra {
+        display: flex;
+        flex-shrink: 1;
+        padding-right: 20px;
+    }
 }
 .option {
     display: inline-block;
     flex-shrink: 1;
-    margin-right: 16px;
+    padding: 6px 10px;
     border-radius: 2px;
     border-bottom: 2px solid #181818;
     transition: 0.3s;
     height: 22px;
     &:hover {
         cursor: pointer;
-        border-bottom: 2px solid #a56d06;
+        & span {
+            color: #a56d06;
+            border-bottom: 2px solid #a56d06;
+        }
     }
     & span {
-        padding: 6px;
         font-size: 18px;
         color: #b4b4b4;
         transition: 0.3s;
-        &:hover {
-            color: #a56d06;
-        }
     }
+}
+
+.seperator {
+    font-size: 24px;
+    color: #b4b4b4;
+    margin: 0px 12px;
 }
