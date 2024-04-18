@@ -31,6 +31,7 @@ import { environment } from '../environments/environment';
 import { RandomCellComponent } from './random-cell/random-cell.component';
 import { HeaderComponent } from './header/header.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     RandomCellComponent,
     SnackbarComponent,
     HeaderComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

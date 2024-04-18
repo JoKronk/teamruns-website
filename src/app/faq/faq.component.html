@@ -1,0 +1,96 @@
+
+<div class="background-image"></div>
+<div class="container">
+    <div class="info-container">
+        <h1>Frequently Asked Questions</h1>
+        <h3>Game Questions</h3>
+        <div>
+            <h4>Is this online multiplayer? <span id="game-online" (click)="select($event)">#</span></h4>
+            <p>Yes.</p>
+        </div>
+        <div>
+            <h4>Does this support couch co-op? <span id="game-coop" (click)="select($event)">#</span></h4>
+            <p>Yes both couch co-op and online are supported, both individually and at the same time.</p>
+        </div>
+        <div>
+            <h4>What is changed compared to the normal game? <span id="game-changes" (click)="select($event)">#</span></h4>
+            <p>
+                All in game cutscenes play in real time without iterrupting gameplay with cutscenes.<br />
+                Bosses are synced by phases, if one player dies while someone else in the fight it will be set back one phase.<br /><br />
+                For Speedruns ONLY: Players need to meetup at the zoomer between each hub world before they will go at full speed.
+            </p>
+        </div>
+        <div>
+            <h4>What is synced/shared between players and what isn't? <span id="game-sync" (click)="select($event)">#</span></h4>
+            <p>Everything except enemies and projectile flight paths should be synced.</p>
+        </div>
+        <div>
+            <h4>Are you planning on adding the remaining things missing? <span id="game-features" (click)="select($event)">#</span></h4>
+            <p>Hopefully yes, I have some plans for how to do these but I also want to take a break after the initial full release.</p>
+        </div>
+        <div>
+            <h4>Can I disable the extra stuff on the screen? <span id="game-ui" (click)="select($event)">#</span></h4>
+            <p>Yes, hold down L2 and R2 then use left and right on the dpad to select UI element and up and down to toggle them.</p>
+        </div>
+
+        
+        <h3>Issues</h3>
+        <div>
+            <h4>I am unable to see other players in the game, help! <span id="issue-game" (click)="select($event)">#</span></h4>
+            <p>There's sometime some issues with this that I'm working on, try some of the following:</p>
+            <p>- Check that none of you are a spectator in the lobby.</p>
+            <p>- Relaunch the game.</p>
+            <p>- Rejoin the lobby.</p>
+            <p>- Recreate the lobby.</p>
+            <p>- Relaunch the client.</p>
+        </div>
+        <div>
+            <h4>Double NAT issue. <span id="issue-nat" (click)="select($event)">#</span></h4>
+            <p>Since the client operates on peer to peer connections it might have trouble establishing one if you're behind a double NAT.<br />
+                If Teamruns doesn't seem to work for you at all in terms of connecting with others this might be the issue but I've only had one instance of a person with this issue so far, I'll hopefully be looking into ways to get around it somewhat soon though (setting up a TURN server).</p>
+        </div>
+        <div>
+            <h4>The game crashed! <span id="issue-crash" (click)="select($event)">#</span></h4>
+            <p>Check if you can replicate it and contact me on discord.</p>
+        </div>
+        
+        
+        <h3>Project Info</h3>
+        <div>
+            <h4>Are you planning on doing Jak II / 3 / X? <span id="new-games" (click)="select($event)">#</span></h4>
+            <p>
+                Not sure, I originally wanted to before I fully understood the scope of the whole project.<br />
+                Either way <a (click)="selectTag('game-sync')">the missing systems in Jak 1</a> would be benefitial to have in place before starting anything on the other games.
+            </p>
+        </div>
+        <div>
+            <h4>Can I help with the project? <span id="can-i-help" (click)="select($event)">#</span></h4>
+            <p>If you want to, this by no means needs to be a solo project, contact me on discord.</p>
+        </div>
+        <div>
+            <h4>Are you planning on createing more game modes / mods for Teamruns? <span id="new-mods" (click)="select($event)">#</span></h4>
+            <p>I hope so but fixing <a (click)="selectTag('game-sync')">the remaining systems</a> and adding better mod support in general should come first.</p>
+        </div>
+        <div>
+            <h4>Can I create a multiplayer mod for/from Teamruns? <span id="can-i-mod" (click)="select($event)">#</span></h4>
+            <p>Support for this is quite bad at the moment but is something I hope to improve.</p>
+        </div>
+        <div>
+            <h4>How are updates handled? <span id="new-updates" (click)="select($event)">#</span></h4>
+            <p>New updates are automatically given to the Client in a update prompt for both the OpenGOAL and Client updates.</p>
+        </div>
+        
+        <h3>User Creation</h3>
+        <div>
+            <h4>Do I need to create a user? <span id="user-create" (click)="select($event)">#</span></h4>
+            <p>No, a user is only needed if you plan to do speedruns and want your time on the leaderboard.</p>
+        </div>
+        
+        <div>
+            <h4>How is my password stored if I create a user? <span id="user-password" (click)="select($event)">#</span></h4>
+            <p>Users including passwords are handled by Firebase, I personally do not have access to see how or where the passwords are stored, the code for <a target="_blank" href="https://github.com/JoKronk/teamruns-client">the client</a> is also open source and can be audited at any time.</p>
+        </div>
+    </div>
+    <p class="bottom-text">OpenGOAL</p>
+</div>
+
