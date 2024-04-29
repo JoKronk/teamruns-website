@@ -2,11 +2,23 @@
   "hosting": [
     {
       "target": "teamrun",
-      "public": "dist/teamruns-website"
+      "public": "dist/teamruns-website",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     },
     {
       "target": "teamruns",
-      "public": "dist/teamruns-website"
+      "public": "dist/teamruns-website",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }
