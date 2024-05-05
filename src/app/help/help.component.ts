@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { Release } from '../common/web/release';
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  selector: 'app-help',
+  templateUrl: './help.component.html',
+  styleUrls: ['./help.component.scss']
 })
-export class IndexComponent {
+export class HelpComponent {
 
   release: string = "";
 

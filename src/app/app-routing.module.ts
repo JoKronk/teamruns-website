@@ -4,11 +4,13 @@ import { IndexComponent } from './index/index.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { RandomCellComponent } from './random-cell/random-cell.component';
 import { FaqComponent } from './faq/faq.component';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   { path: 'rco', component: RandomCellComponent },
   { path: 'leaderboards', component: LeaderboardComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'installation', component: HelpComponent },
   { path: '', component: IndexComponent, pathMatch: 'full' }
 ];
 

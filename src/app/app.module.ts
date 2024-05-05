@@ -32,6 +32,7 @@ import { RandomCellComponent } from './random-cell/random-cell.component';
 import { HeaderComponent } from './header/header.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FaqComponent } from './faq/faq.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FaqComponent } from './faq/faq.component';
     SnackbarComponent,
     HeaderComponent,
     LeaderboardComponent,
-    FaqComponent
+    FaqComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
