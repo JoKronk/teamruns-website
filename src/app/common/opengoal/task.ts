@@ -1,10 +1,12 @@
 import { DbTask } from "../firestore/db-task";
+import { Timer } from "../run/timer";
 
 export class Task {
     gameTask: string;
     isCollectedCell: boolean;
     obtainedByName: string;
     obtainedById: string;
+    obtainedAtMs: number;
     obtainedAt: string;
 
     constructor() {
@@ -16,7 +18,8 @@ export class Task {
             isCollectedCell: task.isCell,
             obtainedByName: task.obtainedByName,
             obtainedById: task.obtainedById,
-            obtainedAt: task.obtainedAt
+            obtainedAtMs: task.obtainedAtMs,
+            obtainedAt: Timer.msToTimeFormat(task.obtainedAtMs, true, true)
         };
     }
 
