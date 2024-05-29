@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'rco', component: RandomCellComponent },
   { path: 'leaderboards', component: LeaderboardComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'installation', component: HelpComponent },
+  { path: 'guides', component: HelpComponent },
   { path: '', component: IndexComponent, pathMatch: 'full' }
 ];
 
