@@ -103,6 +103,15 @@ $RandoCell-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: 'OpenSans', 'Segoe UI', "Helvetica Neue"; }
 
+.coming-soon {
+    margin: 26px 0 6px;
+    font-family: 'jak';
+    font-size: 52px;
+    color: #6c4700;
+    text-align: center;
+    -webkit-user-select: none;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
