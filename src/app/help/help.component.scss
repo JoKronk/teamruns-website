@@ -134,6 +134,15 @@
                 color: #a56d06;
             }
         }
+        & img {
+            padding-top: 6px;
+            user-drag: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            -webkit-user-select: none;
+            max-width:24px;
+            max-height:24px;
+        }
         &-linux {
             border: 2px solid #4892a3;
             color: #4892a3;
