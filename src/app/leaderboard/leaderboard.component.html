@@ -69,9 +69,9 @@
                                   <p *ngIf="content.comment"><b>{{ content.name }}:</b> {{ content.comment }}</p>
                                 </div>
                                 <div *ngFor="let content of run.userDisplayContent">
-                                  <p *ngIf="content.videoLink"><b>{{ content.name }}:</b> 
+                                  <p *ngIf="content.videoLink"><b>{{ content.videoLink }}:</b> 
                                     <iframe
-                                      src="https://player.twitch.tv/?video=v66818638&parent=localhost"
+                                      [src]="content.videoLink"
                                       allowfullscreen>
                                     </iframe>
                                   </p>
