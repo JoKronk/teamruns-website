@@ -35,6 +35,18 @@
             border-bottom: 2px solid #a56d06;
         }
     }
+    &-img {
+        padding: 0px 10px 0px 2px !important;
+        height: 30px;
+    }
+    & img {
+        user-drag: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
+        max-width:100%;
+        max-height:100%;
+    }
     & span {
         font-size: 18px;
         color: #b4b4b4;
