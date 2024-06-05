@@ -32,7 +32,10 @@ import { RandomCellComponent } from './random-cell/random-cell.component';
 import { HeaderComponent } from './header/header.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FaqComponent } from './faq/faq.component';
-import { HelpComponent } from './help/help.component';
+import { HelpComponent } from './guides/help/help.component';
+import { NavBoardComponent } from './nav-board/nav-board.component';
+import { ControlsComponent } from './guides/controls/controls.component';
+import { IssuesComponent } from './issues/issues.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { HelpComponent } from './help/help.component';
     HeaderComponent,
     LeaderboardComponent,
     FaqComponent,
-    HelpComponent
+    HelpComponent,
+    NavBoardComponent,
+    ControlsComponent,
+    IssuesComponent
   ],
   imports: [
     BrowserModule,

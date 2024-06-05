@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Release } from '../common/web/release';
+import { Release } from '../../common/web/release';
 
 @Component({
   selector: 'app-help',

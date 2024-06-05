@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Teamruns';
 
+  showNavbar: boolean = false;
+
   constructor(public router: Router) {
-    
+    router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        //this.showNavbar = event.url.startsWith("/guides");
+      }
+    });
   }
 }
