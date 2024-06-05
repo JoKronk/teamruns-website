@@ -21,7 +21,7 @@
     }
 }
 .option {
-    display: inline-block;
+    display: flex;
     flex-shrink: 1;
     padding: 6px 10px;
     border-radius: 2px;
@@ -48,10 +48,16 @@
         max-height:100%;
     }
     & span {
+        flex-shrink: 1;
         font-size: 18px;
         color: #b4b4b4;
         transition: 0.3s;
         white-space: nowrap;
+    }
+    & mat-icon {
+        flex-shrink: 1;
+        color: #ffae00;
+        padding: 0 6px;
     }
 }
 

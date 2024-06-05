@@ -15,11 +15,12 @@
         <div routerLink="/issues" class="option">
             <span>Issues</span>
         </div>
+        <div (click)="externalRedirect('https://discord.gg/MXXBBeF2')" class="option">
+            <mat-icon>discord</mat-icon>
+            <span>Join the Discord</span>
+        </div>
     </div>
     <div class="header-extra">
-        <div (click)="externalRedirect('https://discord.gg/MXXBBeF2')" class="option">
-            <span>Join Discord</span>
-        </div>
         <div (click)="externalRedirect('/rco')" class="option">
             <span>RCO</span>
         </div>
