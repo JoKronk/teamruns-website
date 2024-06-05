@@ -68,14 +68,6 @@
                                 <div *ngFor="let content of run.userDisplayContent">
                                   <p *ngIf="content.comment"><b>{{ content.name }}:</b> {{ content.comment }}</p>
                                 </div>
-                                <div *ngFor="let content of run.userDisplayContent">
-                                  <p *ngIf="content.videoLink"><b>{{ content.videoLink }}:</b> 
-                                    <iframe
-                                      [src]="content.videoLink"
-                                      allowfullscreen>
-                                    </iframe>
-                                  </p>
-                                </div>
                             </div>
                           </div>
                       </div>
