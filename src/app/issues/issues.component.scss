@@ -27,6 +27,49 @@
     overflow-y: auto;
 }
 
+.info {
+    &-download {
+        display: flex;
+        max-width: 146px;
+        height: 76px;
+        font-family: 'jak';
+        font-size: 24px;
+        margin: auto;
+        margin-top: 0;
+        padding: 1px 10px;
+        transition: 0.2s;
+        background: rgba(0, 0, 0, 0.5);
+        border: 2px solid #a56d06;
+        border-radius: 10px;
+        color: #a56d06;
+        & p {
+            flex-shrink: 1;
+            padding-top: 15px;
+        }
+        & a {
+            color: #b4b4b4;
+            text-decoration: underline;
+            transition: 0.15s;
+            &:hover {
+                cursor: pointer;
+                color: #a56d06;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: #181818;
+        }
+        & mat-icon {
+            flex-shrink: 1;
+            margin: auto;
+            margin-right: 0;
+            width: 78px;
+            height: 42px;
+            font-size: 42px;
+        }
+    }
+}
+
 .info-container {
     margin: auto;
     padding: 1px 10px 40px;
