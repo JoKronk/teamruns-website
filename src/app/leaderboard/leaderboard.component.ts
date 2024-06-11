@@ -113,7 +113,7 @@ export class LeaderboardComponent {
   changePlayerCount() {
     if (this.players === 1) {
       this.sameLevel = "false";
-      this.router.navigate([], { relativeTo: this.route, queryParams: { sl: this.sameLevel, players: this.players }, queryParamsHandling: 'merge'} );
+      this.router.navigate([], { relativeTo: this.route, queryParams: { sl: this.sameLevel, p: this.players }, queryParamsHandling: 'merge'} );
     }
     else
       this.router.navigate([], { relativeTo: this.route, queryParams: { p: this.players }, queryParamsHandling: 'merge'} );
@@ -302,7 +302,7 @@ export class LeaderboardComponent {
     this.selectedCategory = pb.category;
     this.players = pb.playerCount;
     this.sameLevel = pb.sameLevel ? "true" : "false";
-    this.router.navigate([], { relativeTo: this.route, queryParams: { cat: this.selectedCategory, sl: this.sameLevel, players: this.players }, queryParamsHandling: 'merge'} );
+    this.router.navigate([], { relativeTo: this.route, queryParams: { cat: this.selectedCategory, sl: this.sameLevel, p: this.players }, queryParamsHandling: 'merge'} );
     this.updateContent();
   }
 
