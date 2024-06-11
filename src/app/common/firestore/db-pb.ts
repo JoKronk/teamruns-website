@@ -1,8 +1,10 @@
 import { CategoryOption } from "../run/category";
-import { DbLeaderboardPb } from "./db-leaderboard-pb";
+import { Timer } from "../run/timer";
+import { DbLeaderboardPb, UserDisplayContent } from "./db-leaderboard-pb";
 import { DbPlayer } from "./db-player";
 import { DbRun } from "./db-run";
 import { DbTeam } from "./db-team";
+import { DbUsersCollection } from "./db-users-collection";
 
 export class DbPb extends DbLeaderboardPb {
     runId: string;
@@ -15,6 +17,9 @@ export class DbPb extends DbLeaderboardPb {
     wasRace: boolean;
     wasWr: boolean;
 
+    //frontend values
+    timeSinceFrontend: number | undefined;
+    daysSinceFrontend: boolean | undefined;
 
     static convertToFromRun(run: DbRun, team: DbTeam, isWr: boolean): DbPb {
         let pb = new DbPb();
@@ -46,6 +51,39 @@ export class DbPb extends DbLeaderboardPb {
         this.endTimeFrontend = undefined;
         this.userDisplayContent = undefined;
         this.hasLocalUser = undefined;
+        this.timeSinceFrontend = undefined;
+        this.daysSinceFrontend = undefined;
+    }
+
+    override fillFrontendValues(usersCollection: DbUsersCollection) {
+        
+        let pbUserIds = (this.userIds instanceof Map) ? Array.from(this.userIds.keys()) : Array.from(new Map(Object.entries(this.userIds)).keys());
+        this.endTimeFrontend = this.endTimeMs === 0 ? "DNF" : Timer.msToTextFormat(this.endTimeMs);
+        this.timeSinceFrontend = Math.round((new Date().getTime() - this.date) / (1000 * 60 * 60));
+        this.daysSinceFrontend = this.timeSinceFrontend > 24;
+        if (this.daysSinceFrontend)
+            this.timeSinceFrontend = Math.round(this.timeSinceFrontend / 24) + 1;
+
+        if (this.date)
+            this.dateFrontend = new Date(this.date);
+        
+            pbUserIds.forEach((id) => {
+            let username = usersCollection?.users.find(x => x.id === id)?.name ?? "Unknown";
+            let content = this.userContent.find(x => x.userId === id) as UserDisplayContent;
+            if (content && content.userId)
+                content.name = username;
+            else
+                content = new UserDisplayContent(id, username);
+
+            if (!this.userDisplayContent)
+                this.userDisplayContent = [];
+            this.userDisplayContent.push(content);
+        });
+        if (!this.userDisplayContent)
+            this.userDisplayContent = [];
+        this.userDisplayContent.sort((a, b) => a.name.localeCompare(b.name));
+
+        return this;
     }
 
 }

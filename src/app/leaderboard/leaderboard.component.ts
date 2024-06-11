@@ -14,6 +14,7 @@ import { Team } from '../common/run/team';
 import { Task } from '../common/opengoal/task';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DbPb } from '../common/firestore/db-pb';
 
 @Component({
   selector: 'app-leaderboard',
@@ -51,6 +52,8 @@ export class LeaderboardComponent {
 
   selectedRun: DbLeaderboardPb | null = null;
   selectedTeam: Team | null = null;
+
+  recentPbs: DbPb[] = [];
 
   constructor(private firestoreService: FireStoreService, private router: Router, private route: ActivatedRoute) {
 
@@ -93,6 +96,7 @@ export class LeaderboardComponent {
         this.usersCollection = collection;
         this.usersLoaded = true;
         this.updateContent();
+        this.getRecentPbs();
       });
     }
     else
@@ -281,6 +285,25 @@ export class LeaderboardComponent {
       this.selectedRun = null;
       this.selectedTeam = null;
     }
+  }
+
+  getRecentPbs() {
+    const recentPbsSubscription = this.firestoreService.getRecentPbs(5).subscribe(pbs => {
+      recentPbsSubscription.unsubscribe();
+      for (let pb of pbs) {
+        let recentPb = Object.assign(new DbPb(), pb);
+        recentPb.fillFrontendValues(this.usersCollection!);
+        this.recentPbs.push(recentPb);
+      }
+    });
+  }
+
+  routeToCategory(pb: DbPb) {
+    this.selectedCategory = pb.category;
+    this.players = pb.playerCount;
+    this.sameLevel = pb.sameLevel ? "true" : "false";
+    this.router.navigate([], { relativeTo: this.route, queryParams: { cat: this.selectedCategory, sl: this.sameLevel, players: this.players }, queryParamsHandling: 'merge'} );
+    this.updateContent();
   }
 
 }

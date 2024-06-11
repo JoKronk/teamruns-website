@@ -6,7 +6,6 @@ import { CollectionName } from '../common/firestore/collection-name';
 import { DbLeaderboard } from '../common/firestore/db-leaderboard';
 import { DbPb } from '../common/firestore/db-pb';
 import { DbUsersCollection } from '../common/firestore/db-users-collection';
-import { Lobby } from '../common/firestore/lobby';
 import { CategoryOption } from '../common/run/category';
 
 @Injectable({
@@ -43,5 +42,10 @@ export class FireStoreService {
   getWrs(category: CategoryOption, sameLevel: boolean, playerCount: number) {
     this.checkAuthenticated();
     return this.firestore.collection<DbPb>(CollectionName.personalBests, ref => ref.where('category', '==', category).where('sameLevel', '==', sameLevel).where('playerCount', '==', playerCount).where('wasWr', '==', true)).valueChanges({idField: 'id'});
+  }
+
+  getRecentPbs(amount: number) {
+    this.checkAuthenticated();
+    return this.firestore.collection<DbPb>(CollectionName.personalBests, ref => ref.orderBy('date', 'desc').limit(amount)).valueChanges({idField: 'id'});
   }
 }
