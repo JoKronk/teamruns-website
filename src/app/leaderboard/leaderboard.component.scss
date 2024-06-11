@@ -60,8 +60,8 @@
         color: #a8a8a8;
         background-color: rgba(0, 0, 0, 0.5);
         &-container {
-            min-width: 380px;
-            max-width: 380px;
+            min-width: 340px;
+            max-width: 340px;
             flex-grow: 1;
         }
         & h4 {
@@ -81,12 +81,13 @@
                 background-color: rgba(204, 204, 204, 0.1);
             }
             & p {
+                font-size: 14px;
                 margin: 2px;
                 flex-shrink: 1;
                 display: inline-block;
             }
             &-category {
-                font-size: 17px;
+                font-size: 16px;
                 font-weight: bolder;
                 text-decoration: underline;
             }
