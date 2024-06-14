@@ -48,4 +48,12 @@ export class DbRun {
             });
         });
     }
+
+    //!TODO: Could be placed somewhere better
+    static arraysEqual(array1: string[], array2: string[]): boolean {
+        if (array1.length === array2.length)
+            return array1.every(element => array2.includes(element));
+
+        return false;
+    }
 }

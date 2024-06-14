@@ -97,7 +97,7 @@
         <div class="page-recent">
           <h4>Recent Pbs</h4>
           <div *ngFor="let pb of recentPbs" class="page-recent-pb" (click)="routeToCategory(pb)">
-            <p class="page-recent-pb-category">{{ categoryOptions[pb.category].displayName }} <span *ngIf="pb.sameLevel">(Same Level)</span></p>
+            <p class="page-recent-pb-category"><span>{{ pb.lbPositionWhenSetFrontend }} - </span> <span class="page-recent-pb-category-text">{{ categoryOptions[pb.category].displayName }} <span *ngIf="pb.sameLevel">(Same Level)</span></span></p>
             <p><span *ngFor="let user of pb.userDisplayContent; let end = last">
               {{user.name}}<span *ngIf="!end"> · </span>
             </span>
