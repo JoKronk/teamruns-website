@@ -32,7 +32,7 @@ export class LeaderboardComponent {
 
   categoryOptions: Category[] = Category.GetGategories();
   usersCollection?: DbUsersCollection;
-  playerOptions: number[] = [1, 2, 3, 4, 5, 6];
+  playerOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
   toggleSaved: boolean = false;
   wrHistoryLoaded: boolean = false;
