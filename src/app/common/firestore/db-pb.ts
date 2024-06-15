@@ -1,4 +1,5 @@
 import { CategoryOption } from "../run/category";
+import { RunData } from "../run/run-data";
 import { Timer } from "../run/timer";
 import { DbLeaderboardPb, UserDisplayContent } from "./db-leaderboard-pb";
 import { DbPlayer } from "./db-player";
@@ -16,15 +17,20 @@ export class DbPb extends DbLeaderboardPb {
     players: DbPlayer[] = [];
     wasRace: boolean;
     wasWr: boolean;
+    lbPositionWhenSet: number;
+    isCurrentPb: boolean;
+
 
     //frontend values
     timeSinceFrontend: number | undefined;
     daysSinceFrontend: boolean | undefined;
+    lbPositionWhenSetFrontend: string | undefined;
 
     static convertToFromRun(run: DbRun, team: DbTeam, isWr: boolean): DbPb {
         let pb = new DbPb();
 
         pb.version = run.data.buildVersion;
+        pb.gameVersion = run.data.gameVersion;
         pb.date = run.date;
         pb.tasks = team.tasks;
         pb.endTimeMs = team.endTimeMs;
@@ -33,10 +39,8 @@ export class DbPb extends DbLeaderboardPb {
         pb.id = crypto.randomUUID(); //id can't be same as runId since there might be multiple teams pbing which would create duplicates
         pb.runId = run.id ?? "";
         pb.category = run.data.category;
-        pb.sameLevel = run.data.requireSameLevel;
-        team.players.forEach(x => {
-            pb.userIds.set(x.user.id, true);
-        });
+        pb.sameLevel = run.data.sameLevel;
+        pb.userIds = DbPb.convertUserIds(team.players.flatMap(x => x.user.id));
         pb.playerCount = team.players.length;
         pb.cellCount = team.cellCount;
         pb.players = team.players;
@@ -53,6 +57,7 @@ export class DbPb extends DbLeaderboardPb {
         this.hasLocalUser = undefined;
         this.timeSinceFrontend = undefined;
         this.daysSinceFrontend = undefined;
+        this.lbPositionWhenSetFrontend = undefined;
     }
 
     override fillFrontendValues(usersCollection: DbUsersCollection) {
@@ -63,6 +68,8 @@ export class DbPb extends DbLeaderboardPb {
         this.daysSinceFrontend = this.timeSinceFrontend > 24;
         if (this.daysSinceFrontend)
             this.timeSinceFrontend = Math.round(this.timeSinceFrontend / 24) + 1;
+
+        this.lbPositionWhenSetFrontend = DbPb.placementNumberToString(this.lbPositionWhenSet + 1);
 
         if (this.date)
             this.dateFrontend = new Date(this.date);
@@ -84,6 +91,28 @@ export class DbPb extends DbLeaderboardPb {
         this.userDisplayContent.sort((a, b) => a.name.localeCompare(b.name));
 
         return this;
+    }
+
+    static convertUserIds(userIds: string[]): Map<string, boolean> {
+        let userIdsConverted: Map<string, boolean> = new Map();
+        for (let id of userIds)
+            userIdsConverted.set(id, true);
+        return userIdsConverted;
+    }
+
+    static placementNumberToString(placement: number) {
+        let j = placement % 10;
+        let k = placement % 100;
+        if (j === 1 && k !== 11) {
+            return placement + "st";
+        }
+        if (j === 2 && k !== 12) {
+            return placement + "nd";
+        }
+        if (j === 3 && k !== 13) {
+            return placement + "rd";
+        }
+        return placement + "th";
     }
 
 }
