@@ -25,7 +25,7 @@
       </div>
   
     </div>
-    <div class="page-content">
+    <div class="page-content" [class.page-content-column]="selectedRun && pageWidth < 1297">
       <div class="page-table-container">
         <div [class.hide]="showWrHistory" class="page-table-inner">
           
@@ -57,9 +57,9 @@
                       <td mat-cell *matCellDef="let run"> {{run.dateFrontend | date:'dd/MM/yy'}} </td>
                   </ng-container>
                   <ng-container matColumnDef="version">
-                      <th mat-header-cell *matHeaderCellDef> Version </th>
-                      <td mat-cell *matCellDef="let run"> {{run.version}} </td>
-                  </ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Version </th>
+                    <td mat-cell *matCellDef="let run"> {{run.version}} </td>
+                </ng-container>
     
                   <ng-container matColumnDef="expandedRun">
                       <td mat-cell *matCellDef="let run" [attr.colspan]="columns.length">
@@ -93,6 +93,8 @@
           <canvas  id="WRchart" >{{ chart }}</canvas>
         </div> 
       </div>
+
+
       <div *ngIf="recentPbs.length !== 0" class="page-recent-container">
         <div class="page-recent">
           <h4>Recent Pbs</h4>

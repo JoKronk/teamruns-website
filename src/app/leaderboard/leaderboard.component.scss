@@ -52,6 +52,10 @@
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
+
+        &-column {
+        flex-direction: column;
+        }
     }
 
     &-recent {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FireStoreService } from '../services/fire-store.service';
 import { DbUsersCollection } from '../common/firestore/db-users-collection';
 import { Category, CategoryOption } from '../common/run/category';
@@ -54,6 +54,12 @@ export class LeaderboardComponent {
   selectedTeam: Team | null = null;
 
   recentPbs: DbPb[] = [];
+  
+  public pageWidth: any;
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+  this.pageWidth = window.innerWidth;
+}
 
   constructor(private firestoreService: FireStoreService, private router: Router, private route: ActivatedRoute) {
 
@@ -89,6 +95,9 @@ export class LeaderboardComponent {
     });
   }
 
+  ngOnInit() {
+    this.pageWidth = window.innerWidth;
+  }
 
   onQueryParamUpdate() {
     if (!this.usersLoaded) {
