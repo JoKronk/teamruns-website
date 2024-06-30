@@ -69,7 +69,7 @@ export class DbPb extends DbLeaderboardPb {
         if (this.daysSinceFrontend)
             this.timeSinceFrontend = Math.round(this.timeSinceFrontend / 24) + 1;
 
-        this.lbPositionWhenSetFrontend = DbPb.placementNumberToString(this.lbPositionWhenSet + 1);
+        this.lbPositionWhenSetFrontend = DbPb.placementNumberToString(this.lbPositionWhenSet);
 
         if (this.date)
             this.dateFrontend = new Date(this.date);
