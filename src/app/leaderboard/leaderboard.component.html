@@ -57,9 +57,9 @@
                       <td mat-cell *matCellDef="let run"> {{run.dateFrontend | date:'dd/MM/yy'}} </td>
                   </ng-container>
                   <ng-container matColumnDef="version">
-                    <th mat-header-cell *matHeaderCellDef> Version </th>
-                    <td mat-cell *matCellDef="let run"> {{run.version}} </td>
-                </ng-container>
+                      <th mat-header-cell *matHeaderCellDef> Version </th>
+                      <td mat-cell *matCellDef="let run"> {{run.version}} / {{ run.gameVersion ?? '0.1.0' }}</td>
+                  </ng-container>
     
                   <ng-container matColumnDef="expandedRun">
                       <td mat-cell *matCellDef="let run" [attr.colspan]="columns.length">
