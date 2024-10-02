@@ -14,7 +14,9 @@ export class IndexComponent {
   constructor(private httpClient: HttpClient) {
     this.httpClient.get('https://api.github.com/repos/JoKronk/teamruns-client/releases').subscribe(releases => {
       this.release = (releases as Release[]).sort(function (a, b) {
-        return ('' + b.name).localeCompare(a.name);
+        let dateA = Date.parse(a.published_at),
+          dateB = Date.parse(b.published_at);
+        return dateB - dateA;
       })[0].name.substring(1);
     });
 
